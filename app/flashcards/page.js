@@ -1,10 +1,10 @@
 'use client'
 import { useUser } from "@clerk/nextjs"
-import { useEffect, useState, use } from "react"
+import { useEffect, useState } from "react"
 import { collection, doc, getDoc, setDoc } from "firebase/firestore"
 import { db } from "@/firebase"
 import { useRouter } from "next/navigation"
-import { Card, CardActionArea, CardContent, Container, Grid, Typography } from "@mui/material"
+import { Card, CardActionArea, CardContent, Container, Grid, Typography, Button } from "@mui/material"
 
 export default function Flashcards(){
     const {isLoaded, isSignedIn, user} = useUser()
@@ -35,8 +35,21 @@ export default function Flashcards(){
         router.push(`/flashcard?id=${id}`);
     }    
 
+    const handleGoHome = () => {
+        router.push('/')
+    }
+
     return (
         <Container maxWidth="100vw">
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={handleGoHome}
+                sx={{ mt: 2 }}
+            >
+                Back to Home
+            </Button>
+
             <Grid
                 container
                 spacing={3}
@@ -63,5 +76,5 @@ export default function Flashcards(){
                 ))}
             </Grid>
         </Container>
-    )    
+    )
 }
